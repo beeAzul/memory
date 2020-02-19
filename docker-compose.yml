@@ -1,0 +1,30 @@
+version: '2.3'
+services:
+  php_memory:
+    restart: always
+    mem_limit: 1G
+    #hostname: local
+    dns: 8.8.8.8
+    domainname: memory.test
+    container_name: container_mem_php
+    ports:
+      - ${APP_PORT}:80
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - .:/var/www/html
+      - ${APACHE_CONF_PATH}:/etc/apache2/sites-enabled
+    network_mode: ${NET_MODE2}
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+  adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
