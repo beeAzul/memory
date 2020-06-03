@@ -5,7 +5,7 @@ $ npm install
 $ cd web && npm run webpack
 </pre>
 
-### Database initilisation
+### Database initialisation
 
 <pre>
 CREATE DATABASE memory_db DEFAULT CHARACTER SET utf8;
